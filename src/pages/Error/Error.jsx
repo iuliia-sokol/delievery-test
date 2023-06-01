@@ -1,16 +1,21 @@
 import { Container } from 'components/Container/Container';
-import { ErrorCont, TextError } from './Error.styled';
+import { ErrorWrapper, ImgWrapper, NavLinkStyled, TextError } from './Error.styled';
+import error from '../../images/error.png'
 
 const Error = () => {
     return (
-      <ErrorCont>
+      <ErrorWrapper>
         <Container>
           <TextError>
-            <h3>We are sorry,</h3>
+            <strong>We are sorry,</strong>
             <p>but the page you were looking for can’t be found..</p>
+            <NavLinkStyled to='/'>Click to navigate to Homepage</NavLinkStyled>
           </TextError>
+          <ImgWrapper>
+          <img src={error} alt="sad cat page not found" />
+          </ImgWrapper>
         </Container>
-      </ErrorCont>
+      </ErrorWrapper>
     );
   };
   

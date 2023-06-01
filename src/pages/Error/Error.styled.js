@@ -1,38 +1,26 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const ErrorCont = styled.div`
-  padding-bottom: 100px;
-
-  @media screen and (min-width: 768px) {
-    padding-bottom: 204px;
-  }
-
-  @media screen and (min-width: 1440px) {
-    padding-bottom: 203px;
-  }
+export const ErrorWrapper = styled.div`
+width:100%;
+ display:flex; 
+ flex-direction:column;
 `;
 
 export const TextError = styled.div`
-  width: 206px;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 14px;
-  gap: 8px;
+  display:flex; 
+ flex-direction:column;
+  margin-top: 10vh;
+  text-align:center;
+  gap: 12px;
+  color: ${p => p.theme.colors.mainDark};
 
-  h3 {
-    font-style: normal;
+  strong {
     font-weight: 600;
     font-size: 18px;
-    line-height: 20px;
-    letter-spacing: -0.02em;
-    font-feature-settings: 'liga' off;
-    color: #000000;
-    margin-bottom: 8px;
-
+    line-height: 1.6;
     @media screen and (min-width: 768px) {
       font-size: 24px;
-      line-height: 24px;
-      margin-bottom: 14px;
     }
   }
 
@@ -40,39 +28,30 @@ export const TextError = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 1.6;
     text-align: center;
     letter-spacing: -0.02em;
-    font-feature-settings: 'liga' off;
-    color: #000000;
-    opacity: 0.5;
 
     @media screen and (min-width: 768px) {
       font-size: 18px;
-      line-height: 24px;
+      
     }
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 428px;
   }
 `;
 
-export const ImgCont = styled.div`
-  width: 259px;
-  height: 171px;
-  margin: 0 auto;
-  margin-top: -28px;
+export const NavLinkStyled = styled(NavLink)`
+color: ${p => p.theme.colors.mainAccent};
 
-  @media screen and (min-width: 768px) {
-    width: 498px;
-    height: 327px;
-    margin-top: -76px;
-  }
+`
 
-  @media screen and (min-width: 1440px) {
-    width: 498px;
-    height: 331px;
-    margin-top: -110px;
-  }
+export const ImgWrapper = styled.div`
+  display:flex;
+  justify-content:center;
+  margin-top:18px;
+
+  img{
+     width: 259px;
+    }
+ 
+
 `;

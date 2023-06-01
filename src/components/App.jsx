@@ -23,11 +23,11 @@ export const App = () => {
       <GlobalStyle />
       <Routes>
       <Route path="/" element={<SharedLayout />}>
-      <Route index element={<HomePage />} />
+      <Route index path="/home" element={<HomePage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/history" element={<HistoryPage />} />
-      <Route path="*" element={<Error />} />
       </Route>
+      <Route path="*" element={<Error />} />
       </Routes>
       </ThemeProvider>
   );
