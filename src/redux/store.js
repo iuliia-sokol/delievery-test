@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import { authSlice } from './auth/authSlice';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -13,7 +12,12 @@ import {
 } from 'redux-persist';
 
 import themeReducer from './theme/themeSlice';
+import shopsReducer from './shops/shopsSlice';
 
+const shopsPersistConfig = {
+  key: 'shops',
+  storage,
+};
 
 const themePersistConfig = {
   key: 'theme',
@@ -21,11 +25,12 @@ const themePersistConfig = {
 };
 
 const persistedThemeReducer = persistReducer(themePersistConfig, themeReducer);
-
+const persistedShopsReducer = persistReducer(shopsPersistConfig, shopsReducer);
 
 export const store = configureStore({
   reducer: {
     theme: persistedThemeReducer,
+    shops: persistedShopsReducer
   },
 
   middleware: getDefaultMiddleware =>

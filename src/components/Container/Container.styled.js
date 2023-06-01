@@ -1,7 +1,7 @@
 
 import styled from 'styled-components';
 
-export const MainConteiner = styled.div`
+export const MainContainer = styled.main`
   padding: 0 16px;
 
   @media screen and (min-width: 768px) {

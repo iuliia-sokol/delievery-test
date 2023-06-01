@@ -1,4 +1,3 @@
-import { Container } from "components/Container/Container";
 // import { useEffect } from "react";
 import logo from '../../images/logo.png';
 import { ThemeToggler } from "components/ThemeToggler/ThemeToggler";
@@ -28,7 +27,6 @@ export const HeaderComp = () => {
 
     return (
           <Header>
-            <Container>
               <HeaderWrapper>
                 <LogoWrapper>
                   <NavLinkStyled to="/home">
@@ -47,12 +45,8 @@ export const HeaderComp = () => {
                     History
                 </StyledLink>
                 </NavLinksWrapper>
-
-
-               
                 <ThemeToggler />
               </HeaderWrapper>
-            </Container>
           </Header>
     );
   };

@@ -2,19 +2,11 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Header = styled.header`
-  position: absolute;
   box-sizing: border-box;
-  z-index: 10;
   width: 100%;
   height: 100px;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-top: 18px;
+  padding: 18px 0px;
 
-  @media screen and (min-width: 1440px) {
-    padding-top: 14px;
-  }
 `;
 
 export const HeaderWrapper = styled.div`
@@ -22,6 +14,15 @@ export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 32px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 0 100px;
+  }
 `;
 
 export const LogoWrapper = styled.div`

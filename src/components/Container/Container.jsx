@@ -1,5 +1,5 @@
-import { MainConteiner } from './Container.styled';
+import { MainContainer } from './Container.styled';
 
 export const Container = ({children}) => {
-  return <MainConteiner>{children}</MainConteiner>;
+  return <MainContainer>{children}</MainContainer>;
 };

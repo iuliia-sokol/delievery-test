@@ -1,11 +1,11 @@
-import { Container } from "components/Container/Container";
+import { Footer } from "./Footer.styled";
 
 export const FooterComp = () => {
 
     return (
          
-            <Container>
+            <Footer>
             
-            </Container>
+            </Footer>
     );
   };
