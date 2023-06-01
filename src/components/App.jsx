@@ -1,16 +1,34 @@
+import { lazy, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { GlobalStyle } from './App.styled';
+import { ThemeProvider } from 'styled-components';
+import { theme as lightMode, darkTheme as darkMode } from 'utils/theme';
+import { getMode } from 'redux/theme/themeSelector';
+
+import SharedLayout from './SharedLayout/SharedLayout';
+import Error from 'pages/Error/Error';
+import HomePage from 'pages/HomePage/HomePage'
+import { useSelector } from 'react-redux';
+
+
+const CartPage = lazy(() => import('pages/CartPage/CartPage'));
+const HistoryPage = lazy(() => import('pages/HistoryPage/HistoryPage'));
+
 export const App = () => {
+  const { mode } = useSelector(getMode);
+  const themeMode = mode === 'light' ? lightMode : darkMode;
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-   Hello
-    </div>
+    <ThemeProvider theme={themeMode}>
+      <GlobalStyle />
+      <Routes>
+      <Route path="/" element={<SharedLayout />}>
+      <Route index element={<HomePage />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/history" element={<HistoryPage />} />
+      <Route path="*" element={<Error />} />
+      </Route>
+      </Routes>
+      </ThemeProvider>
   );
 };
