@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Golden-Bloom';
+  src: local('Golden-Bloom'),
+    url('./fonts/Golden-Bloom-Regular.ttf') format('truetype');
+}
+
 body {
   margin: 0;
   position: relative;

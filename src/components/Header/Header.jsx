@@ -2,7 +2,7 @@ import { Container } from "components/Container/Container";
 // import { useEffect } from "react";
 import logo from '../../images/logo.png';
 import { ThemeToggler } from "components/ThemeToggler/ThemeToggler";
-import { Header, HeaderWrapper, LogoWrapper, NavLinkStyled, NavLinksWrapper, StyledLink } from "./Header.styled";
+import { Header, HeaderWrapper,LogoText, LogoWrapper, NavLinkStyled, NavLinksWrapper, StyledLink } from "./Header.styled";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 
@@ -33,6 +33,7 @@ export const HeaderComp = () => {
                 <LogoWrapper>
                   <NavLinkStyled to="/home">
                     <img src={logo} alt="logo" />
+                    <LogoText>GoodFood</LogoText>
                   </NavLinkStyled>
                 </LogoWrapper>
                 <NavLinksWrapper>

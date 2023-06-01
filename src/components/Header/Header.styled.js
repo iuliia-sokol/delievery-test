@@ -28,9 +28,15 @@ export const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
 `;
 
 export const NavLinkStyled = styled(NavLink)`
+display:flex;
+gap:8px;
+align-items: center;
+  justify-content: space-between;
+
   & img {
     width: 40px;
     height: 40px;
@@ -41,10 +47,12 @@ export const NavLinkStyled = styled(NavLink)`
     }
   }
 `;
-
+export const LogoText = styled.h2`
+ color: ${p => p.theme.colors.mainDark};
+ font-family: ${p => p.theme.fonts.logo};
+`
 export const NavLinksWrapper = styled.nav`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 32px;
@@ -54,7 +62,6 @@ export const NavLinksWrapper = styled.nav`
   }
 
   @media screen and (min-width: 1440px) {
-    flex-direction: row;
     gap: 30px;
     justify-content: space-between;
     margin-left: 180px;
