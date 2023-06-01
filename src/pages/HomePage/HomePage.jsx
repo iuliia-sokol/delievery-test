@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import defaultShopLogo from '../../images/defaultShopLogo.png'
 import { useDispatch } from "react-redux";
+import { getShops } from "redux/shops/shopsOperations";
 
 const HomePage = () => {
 const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const [shops, setShops] = useState([])
 
 useEffect(() => {
   dispatch(getShops());
-}, [dispatch, pageNumber]);
+}, [dispatch]);
 
 
 return (
