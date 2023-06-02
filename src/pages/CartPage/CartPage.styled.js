@@ -20,8 +20,7 @@ display:flex;
 flex-direction:column;
 gap:16px;
 border-radius: ${p => p.theme.radii.tabs};
-    padding: 16px;
-    background-color: hsla(215, 98%, 79%, 0.4);
+    padding: 16px 32px;
     box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
 `
 
@@ -29,16 +28,55 @@ export const InputsWrapper = styled.div`
 display:flex;
 flex-direction:column;
 gap:16px;
-`
-export const ErrorMessage = styled.p`
-color: red;
+
+label {
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    color: ${p => p.theme.colors.mainDark};  
+}
+
+input {
+    width:200px;
+    border-radius: 8px;
+    padding:6px 12px;
+}
+
+button {
+    align-self:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  background-color:${p => p.theme.colors.mainAccent};
+  border-radius: ${p => p.theme.radii.btnStandart};
+  padding:8px 12px;
+  font-family: ${p => p.theme.fonts.main};
+  font-size: 14px;
+  font-weight: ${p => p.theme.fontWeights[2]};
+  text-transform: uppercase;
+  color: ${p => p.theme.colors.mainLight};
+  transition: ${p => p.theme.transitions.main};
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    background-color: transparent;
+    border: 2px solid pink;
+  }
+}
 `
 
-export const CartDataWrapper = styled.ul`
+export const CartDataWrapper = styled.div`
 flex-grow:1;
 display:flex;
 flex-direction:column;
 gap:8px;
+height:fit-content;
 max-height:70vh;
 overflow-y:scroll;
 padding: 16px;
@@ -101,6 +139,7 @@ width:100%;
 margin:16px 0px;
 display:flex;
 align-items:center;
+align-self:flex-end;
 justify-content:space-between;
 `
 

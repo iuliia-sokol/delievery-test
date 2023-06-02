@@ -16,6 +16,9 @@ import { createSlice } from '@reduxjs/toolkit';
               state.cart.push({ ...action.payload, quantity: 1 });
             }
           },
+          cleanCart: (state) => {
+              state.cart = [];    
+          },
           incrementQuantity: (state, action) => {
             const item = state.cart.find((item) => item.name === action.payload);
             item.quantity++
@@ -42,4 +45,5 @@ import { createSlice } from '@reduxjs/toolkit';
     incrementQuantity,
     decrementQuantity,
     removeItem,
+    cleanCart
   } = cartSlice.actions;

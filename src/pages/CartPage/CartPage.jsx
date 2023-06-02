@@ -9,32 +9,7 @@ import { getCart } from "redux/cart/cartSelectors";
 import defaultShopLogo from '../../images/defaultShopLogo.png'
 import { BASE_URL } from 'utils/consts';
 import { Button } from "components/Button/Button";
-import { decrementQuantity, incrementQuantity, removeItem } from "redux/cart/cartSlice";
-
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
-const FormSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Name must contain at least 2 letters')
-    .max(16, 'Name must contain maximum 16 letters')
-    .matches(
-      /^[ыЫа-яА-Я1-9a-zA-ZіІєЄґҐїЇ]+(([' -][ыЫа-яА-Я1-9a-zA-ZіІєЄґҐїЇ])?[ыЫа-яА-Я1-9a-zA-ZіІєЄґҐїЇ]*)*$/,
-      'Name must contain only letters'
-    )
-    .required('Name is required'),
-    email: Yup.mixed().test({
-      name: 'email',
-      params: { a: 'test', b: 'qwe' },
-      test: value => {
-        return /\w+@\w+\.\w{1,5}/.test(value);
-      },
-    }),
-    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
-    .required('Name is required'),
-    address: Yup.string()
-    .min(5, 'Address must contain at least 5 letters')
-    .required('Address is required'),
-});
+import { cleanCart, decrementQuantity, incrementQuantity, removeItem } from "redux/cart/cartSlice";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -49,6 +24,7 @@ const CartPage = () => {
 
   const handleSubmit = ({values, order, total}) => {
     console.log(values, order, total);
+    dispatch(cleanCart())
     // dispatch(updateUserInfo(formData));
 
   };
@@ -76,9 +52,10 @@ const CartPage = () => {
       {props => (
         <Form onSubmit={props.handleSubmit}>
           <InputsWrapper>
-            <label htmlFor="name" id="labelName">
+            <label htmlFor="name" id="labelName"> Name
               <input
                 type="text"
+                placeholder="Enter your name"
                 name="name"
                 value={props.values.name}
                 id="name"
@@ -94,14 +71,12 @@ const CartPage = () => {
                   props.setFieldValue('name', event.target.value);
                 }}
               />
-                {/* {props.errors.name && props.touched.name ? (
-              <ErrorMessage>{props.errors.name}</ErrorMessage>
-            ) : null} */}
             </label>
-            <label htmlFor="email" id="labelEmail">
+            <label htmlFor="email" id="labelEmail"> Email
               <input
                 type="email"
                 name="email"
+                placeholder="Enter your email"
                 value={props.values.email}
                 id="email"
                 onBlur={() => {
@@ -116,14 +91,12 @@ const CartPage = () => {
                   props.setFieldValue('email', event.target.value);
                 }}
               />
-                {/* {props.errors.email && props.touched.email ? (
-              <ErrorMessage>{props.errors.email}</ErrorMessage>
-            ) : null} */}
             </label>
-            <label htmlFor="phone" id="labelPhone">
+            <label htmlFor="phone" id="labelPhone"> Phone
               <input
                 type="tel"
                 name="phone"
+                placeholder="Enter your phone number"
                 value={props.values.phone}
                 id="phone"
                 onBlur={() => {
@@ -138,14 +111,12 @@ const CartPage = () => {
                   props.setFieldValue('phone', event.target.value);
                 }}
               />
-                {/* {props.errors.phone && props.touched.phone ? (
-              <ErrorMessage>{props.errors.phone}</ErrorMessage>
-            ) : null} */}
             </label>
-            <label htmlFor="address" id="labelAddress">
+            <label htmlFor="address" id="labelAddress"> Address
               <input
                 type="text"
                 name="address"
+                placeholder="Enter your address"
                 value={props.values.address}
                 id="address"
                 onBlur={() => {
@@ -160,9 +131,6 @@ const CartPage = () => {
                   props.setFieldValue('address', event.target.value);
                 }}
               />
-                {/* {props.errors.address && props.touched.address ? (
-              <ErrorMessage>{props.errors.address}</ErrorMessage>
-            ) : null} */}
             </label>
             <button
               type="submit"
@@ -177,8 +145,10 @@ const CartPage = () => {
       )}
     </Formik>
         </FormWrapper>
-        <CartDataWrapper>
-        {cart.map(item => {
+        <CartDataWrapper> 
+         {cart.length<=0 ? <p>Cart is empty</p>:
+          <ul>
+          {cart.map(item => {
                   return (
                     <li key={item.name} >
                       <ProductWrapper>
@@ -206,6 +176,9 @@ const CartPage = () => {
                     </li>
                   );
                 })}
+          </ul>}
+
+     
                 <TotalWrapper>
                   <p>Total:</p>
                   <p>{total} UAH</p>
