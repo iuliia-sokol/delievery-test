@@ -10,6 +10,7 @@ export const Header = styled.header`
 `;
 
 export const HeaderWrapper = styled.div`
+box-sizing:border-box;
   width: 100%;
   display: flex;
   align-items: center;
