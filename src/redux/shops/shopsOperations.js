@@ -6,7 +6,6 @@ export const getShops = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const data = await fetchShops();
-        console.log(data);
         return data;
       } catch (error) {
         return rejectWithValue(error.response.status);

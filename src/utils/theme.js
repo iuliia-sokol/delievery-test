@@ -16,37 +16,17 @@ export const theme = {
     logo: 'Golden-Bloom'
   },
   fontWeights: [400, 500, 600, 700],
-  lineHeights: {
-    subheader: '1',
-    content: '1.33',
-    extraContent: '1.29',
-    btnText: '1.12',
-    description: '1.25',
-    time: '1.43',
-    headerLinks: '1.6',
-    userLink: '1.7',
-    searchSelect: '1.5',
-  },
-  letterSpacings: {
-    subheader: '-0.24px',
-    content: '-0.02em',
-  },
 
   borders: {
     btnStandart: '2px solid #FAFAFA',
     btnHover: '2px solid #8BAA36',
-    mainSearchInput: '1px solid #F0F0F0',
-    searchInput: '1px solid #F0F0F0',
-    mainNavBord: '1px solid transparent',
   },
   radii: {
     btnStandart: '6px',
-    btnIcon: '4px',
-    logo: '12px',
+    tabs: '12px',
     image: '8px',
     switch: '50px',
     pagination: '26px',
-    modal: '24px',
     circle: '50%',
   },
   transitions: {
@@ -72,37 +52,17 @@ export const darkTheme = {
     logo: 'Golden-Bloom'
   },
   fontWeights: [400, 500, 600, 700],
-  lineHeights: {
-    subheader: '1',
-    content: '1.33',
-    extraContent: '1.29',
-    btnText: '1.12',
-    description: '1.25',
-    time: '1.43',
-    headerLinks: '1.6',
-    userLink: '1.7',
-    searchSelect: '1.5',
-  },
-  letterSpacings: {
-    subheader: '-0.24px',
-    content: '-0.02em',
-  },
 
   borders: {
     btnStandart: '2px solid #FAFAFA',
     btnHover: '2px solid #8BAA36',
-    mainSearchInput: '1px solid rgba(255, 255, 255, 0.2)',
-    searchInput: '1px solid rgba(255, 255, 255, 0.2)',
-    mainNavBord: '1px solid #8BAA36',
   },
   radii: {
     btnStandart: '6px',
-    btnIcon: '4px',
-    logo: '12px',
+    tabs: '12px',
     image: '8px',
     switch: '50px',
     pagination: '26px',
-    modal: '24px',
     circle: '50%',
   },
   transitions: {

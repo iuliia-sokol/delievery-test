@@ -1,4 +1,4 @@
 export const getShopsList = state =>
-  state.shops;
+  state.shops.shops;
 export const getIsShopFetching = state =>
-  state.isFetching;
+  state.shops.isFetching;
