@@ -1,13 +1,20 @@
 {
   "files": {
-    "main.css": "/delivery-test/static/css/main.7acaea2f.css",
-    "main.js": "/delivery-test/static/js/main.2b5852f5.js",
+    "main.css": "/delivery-test/static/css/main.0f9f16ce.css",
+    "main.js": "/delivery-test/static/js/main.47c2e54d.js",
+    "static/js/693.7133049f.chunk.js": "/delivery-test/static/js/693.7133049f.chunk.js",
+    "static/js/332.887a50dc.chunk.js": "/delivery-test/static/js/332.887a50dc.chunk.js",
+    "static/media/error.png": "/delivery-test/static/media/error.dc0564992d6349eeecb1.png",
+    "static/media/Golden-Bloom-Regular.ttf": "/delivery-test/static/media/Golden-Bloom-Regular.aaf7aff5c9b38e9e9e72.ttf",
+    "static/media/defaultShopLogo.png": "/delivery-test/static/media/defaultShopLogo.2416c219338e915dcc66.png",
     "index.html": "/delivery-test/index.html",
-    "main.7acaea2f.css.map": "/delivery-test/static/css/main.7acaea2f.css.map",
-    "main.2b5852f5.js.map": "/delivery-test/static/js/main.2b5852f5.js.map"
+    "main.0f9f16ce.css.map": "/delivery-test/static/css/main.0f9f16ce.css.map",
+    "main.47c2e54d.js.map": "/delivery-test/static/js/main.47c2e54d.js.map",
+    "693.7133049f.chunk.js.map": "/delivery-test/static/js/693.7133049f.chunk.js.map",
+    "332.887a50dc.chunk.js.map": "/delivery-test/static/js/332.887a50dc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.2b5852f5.js"
+    "static/css/main.0f9f16ce.css",
+    "static/js/main.47c2e54d.js"
   ]
 }
