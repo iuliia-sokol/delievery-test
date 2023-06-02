@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Container } from "components/Container/Container";
 import { MainWrapper, ProductCard, ProductData, ProductImg, ProductsList, ProductsPanel, ShopLogoImg, ShopTab, ShopsList, ShopsPanel } from "./HomePage.styled";
-import { useEffect, useState } from "react";
-
 import defaultShopLogo from '../../images/defaultShopLogo.png'
-import { useDispatch, useSelector } from "react-redux";
 import { getShops } from "redux/shops/shopsOperations";
 import { getIsShopFetching, getShopsList } from "redux/shops/shopsSelectors";
 import { BASE_URL } from 'utils/consts';
