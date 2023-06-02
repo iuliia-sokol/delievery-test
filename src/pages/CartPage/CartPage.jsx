@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { ErrorMessage, Formik } from 'formik';
-import * as Yup from 'yup';
+import { Formik } from 'formik';
 import { Container } from "components/Container/Container";
 import { MainWrapper } from "pages/HomePage/HomePage.styled";
 import { CartDataWrapper, CartImg, Form, FormWrapper, InputsWrapper, ProductInfoWrapper, ProductPriceWrapper, ProductQuantityWrapper, ProductWrapper, TotalWrapper } from "./CartPage.styled";
@@ -10,6 +9,7 @@ import defaultShopLogo from '../../images/defaultShopLogo.png'
 import { BASE_URL } from 'utils/consts';
 import { Button } from "components/Button/Button";
 import { cleanCart, decrementQuantity, incrementQuantity, removeItem } from "redux/cart/cartSlice";
+import { setHistory } from "redux/history/historyOperations";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -23,10 +23,10 @@ const CartPage = () => {
   },[cart])
 
   const handleSubmit = ({values, order, total}) => {
-    console.log(values, order, total);
+    const data = {values, order, total}
+    console.log(data);
     dispatch(cleanCart())
-    // dispatch(updateUserInfo(formData));
-
+    // dispatch(setHistory(data));
   };
 
 
@@ -41,7 +41,6 @@ const CartPage = () => {
         phone: '',
         address: '',
       }}
-      // validationSchema={FormSchema}
       onSubmit={(values, actions) => {
         console.log('form', values)
         handleSubmit({values, order:JSON.stringify(cart), total});

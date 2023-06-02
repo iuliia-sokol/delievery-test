@@ -14,6 +14,7 @@ import {
 import themeReducer from './theme/themeSlice';
 import shopsReducer from './shops/shopsSlice';
 import cartReducer from './cart/cartSlice';
+import historyReducer from './history/historySlice'
 
 const shopsPersistConfig = {
   key: 'shops',
@@ -30,15 +31,22 @@ const cartPersistConfig = {
   storage,
 };
 
+const historyPersistConfig = {
+  key: 'history',
+  storage,
+};
+
 const persistedThemeReducer = persistReducer(themePersistConfig, themeReducer);
 const persistedShopsReducer = persistReducer(shopsPersistConfig, shopsReducer);
 const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
+const persistedHistoryReducer = persistReducer(historyPersistConfig, historyReducer);
 
 export const store = configureStore({
   reducer: {
     theme: persistedThemeReducer,
     shops: persistedShopsReducer,
-    cart: persistedCartReducer
+    cart: persistedCartReducer,
+    history:persistedHistoryReducer
   },
 
   middleware: getDefaultMiddleware =>
