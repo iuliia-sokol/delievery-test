@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 import defaultShopLogo from '../../images/defaultShopLogo.png'
 import { useDispatch, useSelector } from "react-redux";
 import { getShops } from "redux/shops/shopsOperations";
-import { getShopsList } from "redux/shops/shopsSelectors";
+import { getIsShopFetching, getShopsList } from "redux/shops/shopsSelectors";
 import { BASE_URL } from 'utils/consts';
 import { Button } from "components/Button/Button";
+import { Loader } from "components/Loader/Loader";
+import { addToCart } from "redux/cart/cartSlice";
 
 const HomePage = () => {
 const dispatch = useDispatch();
 const [shops, setShops] = useState([])
 const [currentShop, setCurrentShop] = useState(null)
+const loading = useSelector(getIsShopFetching)
 const shopsArr = useSelector(getShopsList)
 
 
@@ -36,7 +39,10 @@ const onShopTabClick = (shopId) => {
 
 return (
       <Container >
-      <MainWrapper>
+    {loading? 
+    <Loader/>
+:    
+    <MainWrapper>
         <ShopsPanel>
           <ShopsList>
           {shops.map(item => {
@@ -57,7 +63,7 @@ return (
           <ProductsList>
           {currentShop && currentShop.dishes.map(item => {
                   return (
-                    <li key={item._id}>
+                    <li key={item.name}>
 
                       <ProductCard>
                       <ProductImg
@@ -66,7 +72,8 @@ return (
                      <h4>{item.name}</h4>
                      <p>{item.description}</p>
                      </ProductData>
-                      <Button text='Add to cart'/>
+                      <Button text='Add to cart'  onClick={() => 
+                       dispatch(addToCart(item))}/>
 
                       </ProductCard>
                     </li>
@@ -75,7 +82,7 @@ return (
           </ProductsList>
         </ProductsPanel>
 
-      </MainWrapper>
+      </MainWrapper>}
     
       </Container>
     );

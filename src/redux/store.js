@@ -13,6 +13,7 @@ import {
 
 import themeReducer from './theme/themeSlice';
 import shopsReducer from './shops/shopsSlice';
+import cartReducer from './cart/cartSlice';
 
 const shopsPersistConfig = {
   key: 'shops',
@@ -24,13 +25,20 @@ const themePersistConfig = {
   storage,
 };
 
+const cartPersistConfig = {
+  key: 'cart',
+  storage,
+};
+
 const persistedThemeReducer = persistReducer(themePersistConfig, themeReducer);
 const persistedShopsReducer = persistReducer(shopsPersistConfig, shopsReducer);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 export const store = configureStore({
   reducer: {
     theme: persistedThemeReducer,
-    shops: persistedShopsReducer
+    shops: persistedShopsReducer,
+    cart: persistedCartReducer
   },
 
   middleware: getDefaultMiddleware =>
