@@ -25,6 +25,15 @@ border-radius: ${p => p.theme.radii.tabs};
     box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
 `
 
+export const InputsWrapper = styled.div`
+display:flex;
+flex-direction:column;
+gap:16px;
+`
+export const ErrorMessage = styled.p`
+color: red;
+`
+
 export const CartDataWrapper = styled.ul`
 flex-grow:1;
 display:flex;
@@ -94,3 +103,4 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 `
+
