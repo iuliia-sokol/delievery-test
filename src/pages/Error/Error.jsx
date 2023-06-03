@@ -9,7 +9,7 @@ const Error = () => {
           <TextError>
             <strong>We are sorry,</strong>
             <p>but the page you were looking for can’t be found..</p>
-            <NavLinkStyled to='/'>Click to navigate to Homepage</NavLinkStyled>
+            <NavLinkStyled to='/home'>Click to navigate to Homepage</NavLinkStyled>
           </TextError>
           <ImgWrapper>
           <img src={error} alt="sad cat page not found" />
