@@ -22,6 +22,7 @@ const shopsArr = useSelector(getShopsList)
 const cart = useSelector(getCart)
 
 
+
 useEffect(() => {
   dispatch(getShops());
   

@@ -148,3 +148,8 @@ align-self:center;
 display:flex;
 justify-content:center;
 `
+
+export const MapsInfo = styled.p`
+z-index:100;
+font-size:10px;
+`

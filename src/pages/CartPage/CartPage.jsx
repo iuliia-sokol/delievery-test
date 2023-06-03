@@ -2,23 +2,68 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Formik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { GoogleMap, InfoWindow, InfoWindowF, MarkerF, useLoadScript } from "@react-google-maps/api";
+import { useGeolocated } from 'react-geolocated';
+
 import { Container } from "components/Container/Container";
 import { MainWrapper } from "pages/HomePage/HomePage.styled";
-import { CaptchaWrapper, CartDataWrapper, CartImg, Form, FormWrapper, InputsWrapper, ProductInfoWrapper, ProductPriceWrapper, ProductQuantityWrapper, ProductWrapper, TotalWrapper } from "./CartPage.styled";
+import { CaptchaWrapper, CartDataWrapper, CartImg, Form, FormWrapper, InputsWrapper, MapsInfo, ProductInfoWrapper, ProductPriceWrapper, ProductQuantityWrapper, ProductWrapper, TotalWrapper } from "./CartPage.styled";
 import { getCart } from "redux/cart/cartSelectors";
 import defaultShopLogo from '../../images/defaultShopLogo.png'
-import { BASE_URL, CAPTCHA_KEY } from 'utils/consts';
+import { BASE_URL, CAPTCHA_KEY, MAPS_KEY } from 'utils/consts';
 import { Button } from "components/Button/Button";
 import { cleanCart, decrementQuantity, incrementQuantity, removeItem } from "redux/cart/cartSlice";
 import { setHistory } from "redux/history/historyOperations";
+import { Loader } from "components/Loader/Loader";
+import { getShopsList } from "redux/shops/shopsSelectors";
 
 
-const CartPage = () => {
+const CartPage = (shopLang, shopLat) => {
   const dispatch = useDispatch();
   const cart = useSelector(getCart)
   const [total, setTotal] = useState(0)
   const [checked, setChecked] = useState(false)
+  const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [infoWindowOpen, setInfoWindowOpen] = useState(false);
+  const [activeMarker, setActiveMarker] = useState(null)
 
+  const shops = useSelector(getShopsList)
+  const shop = shops.find(shop=> shop._id===cart[0].shopId)
+  const shopCoords = {"lat": +shop.lat, "lng": +shop.long}
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey:`${MAPS_KEY}`,
+  });
+
+
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+  useGeolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: undefined,
+    suppressLocationOnMount: false,
+  });
+
+
+  useEffect(() => {
+    if (coords) {
+     setLatitude(coords.latitude);
+     setLongitude(coords.longitude);
+    
+    }
+    if (!isGeolocationAvailable || !isGeolocationEnabled ) {
+     setLatitude('')
+     setLongitude('')
+    }
+    return;
+  }, [coords, isGeolocationAvailable, isGeolocationEnabled]);
+
+  // useEffect(()=>{},[])
+  // console.log(shopCoords);
+
+ 
   useEffect(()=>{
     if(cart.length>0){
       setTotal(cart.reduce((total, item)=>total+(item.price*item.quantity),0))
@@ -39,10 +84,65 @@ const CartPage = () => {
     setChecked(!checked)
   }
 
+  const onMarkerClick=(elem)=>{
+    setActiveMarker(elem)
+    setInfoWindowOpen(true);
+  }
+
     return (
       <Container >
+          {!isLoaded ? (
+        <Loader/>
+      ) :
       <MainWrapper>
         <FormWrapper>
+        <div>
+        {latitude && longitude && 
+        <GoogleMap
+          mapContainerClassName="map-container"
+          center={{ lat: +latitude, lng: +longitude }}
+          zoom={10}
+        >
+         <MarkerF
+         clickable
+         title={shop.name}
+          onClick={() => {
+            onMarkerClick('shop');
+          }}
+          icon={"http://maps.google.com/mapfiles/ms/icons/red-dot.png"}
+          position={shopCoords}
+        >
+          {infoWindowOpen && activeMarker==='shop' && (
+            <InfoWindowF  onCloseClick={() => {
+              setInfoWindowOpen(false)
+              setActiveMarker(null)
+              }}>
+              <MapsInfo>{shop.name}</MapsInfo>
+            </InfoWindowF>
+          )}
+
+        </MarkerF>
+        <MarkerF
+          clickable
+          title='Your location'
+          onClick={() => {
+            onMarkerClick('loc');
+          }}
+          position={{ lat: +latitude, lng: +longitude }}
+          icon={"http://maps.google.com/mapfiles/ms/icons/green-dot.png"}
+        >
+          {infoWindowOpen && activeMarker==='loc' && (
+            <InfoWindowF   onCloseClick={() => {
+              setInfoWindowOpen(false)
+              setActiveMarker(null)
+              }}>
+              <MapsInfo>Your location</MapsInfo>
+            </InfoWindowF>
+          )}
+        </MarkerF>
+    
+        </GoogleMap>}
+        </div>
         <Formik
       initialValues={{
         name: '',
@@ -195,6 +295,7 @@ const CartPage = () => {
                   </TotalWrapper>
         </CartDataWrapper>
       </MainWrapper>
+      }
       </Container>
     );
   };
