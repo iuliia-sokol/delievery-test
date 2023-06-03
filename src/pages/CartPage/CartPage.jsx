@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Formik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { GoogleMap, InfoWindow, InfoWindowF, MarkerF, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, InfoWindowF, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useGeolocated } from 'react-geolocated';
 
 import { Container } from "components/Container/Container";
@@ -27,6 +27,7 @@ const CartPage = (shopLang, shopLat) => {
   const [latitude, setLatitude] = useState('');
   const [infoWindowOpen, setInfoWindowOpen] = useState(false);
   const [activeMarker, setActiveMarker] = useState(null)
+  const [locationMarker, setLocationMarker]=useState({})
 
   const shops = useSelector(getShopsList)
   const shop = shops.find(shop=> shop._id===cart[0].shopId)
@@ -51,7 +52,7 @@ const CartPage = (shopLang, shopLat) => {
     if (coords) {
      setLatitude(coords.latitude);
      setLongitude(coords.longitude);
-    
+     setLocationMarker({ lat: +coords.latitude, lng: +coords.longitude })
     }
     if (!isGeolocationAvailable || !isGeolocationEnabled ) {
      setLatitude('')
@@ -89,6 +90,15 @@ const CartPage = (shopLang, shopLat) => {
     setInfoWindowOpen(true);
   }
 
+  const onMarkerDragEnd = (coord) => {
+    console.log(coord);
+    const { latLng } = coord;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+    setLocationMarker({lat,lng})
+    
+  };
+
     return (
       <Container >
           {!isLoaded ? (
@@ -100,12 +110,12 @@ const CartPage = (shopLang, shopLat) => {
         {latitude && longitude && 
         <GoogleMap
           mapContainerClassName="map-container"
-          center={{ lat: +latitude, lng: +longitude }}
+          center={locationMarker}
           zoom={10}
         >
          <MarkerF
          clickable
-         title={shop.name}
+         name={shop.name}
           onClick={() => {
             onMarkerClick('shop');
           }}
@@ -122,13 +132,16 @@ const CartPage = (shopLang, shopLat) => {
           )}
 
         </MarkerF>
+       {locationMarker &&
         <MarkerF
           clickable
-          title='Your location'
+          draggable={true}
+          onDragend={(t, map, coord) => onMarkerDragEnd(coord)}
+          name='Your location'
           onClick={() => {
             onMarkerClick('loc');
           }}
-          position={{ lat: +latitude, lng: +longitude }}
+          position={locationMarker}
           icon={"http://maps.google.com/mapfiles/ms/icons/green-dot.png"}
         >
           {infoWindowOpen && activeMarker==='loc' && (
@@ -139,7 +152,7 @@ const CartPage = (shopLang, shopLat) => {
               <MapsInfo>Your location</MapsInfo>
             </InfoWindowF>
           )}
-        </MarkerF>
+        </MarkerF>}
     
         </GoogleMap>}
         </div>
