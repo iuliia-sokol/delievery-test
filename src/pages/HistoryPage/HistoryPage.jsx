@@ -8,26 +8,47 @@ import { getHistoryRecord, getIsHistoryFetching } from "redux/history/historySel
 import { Loader } from "components/Loader/Loader";
 import defaultShopLogo from '../../images/defaultShopLogo.png'
 import { BASE_URL } from 'utils/consts';
+import { filterContact } from "redux/filter/filterSlice";
+import { getFilter } from "redux/filter/filterSelectors";
 
 const HistoryPage = () => {
   const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
   const history = useSelector(getHistoryRecord)
   const loading = useSelector(getIsHistoryFetching)
+
 
   useEffect(() => {
     dispatch(getHistory());
     
   }, [dispatch]);
+
+
+
+  const filterContacts = () => {
+    const query = filter.toLocaleLowerCase();
+
+    const filteredContacts = history.filter(el =>
+      el.email.toLocaleLowerCase().includes(query)
+    );
+
+    if (query && !filteredContacts.length) {
+      // alert('No orders matching your request');
+      return [];
+    }
+    return filteredContacts;
+  };
+
     return (
       <Container >
        <MainWrapper>
         <InputsWrapper>
-        <h4>Search</h4>
-        <label>Name 
-          <input type="text"/>
-        </label>
+        <h4>Search orders by email</h4>
         <label>Email 
-          <input type="email"/>
+          <input type="text"
+           placeholder="Start entering your email"
+           value={filter}
+           onChange={e => dispatch(filterContact(e.target.value))}/>
         </label>
         </InputsWrapper>
        {loading? <Loader/>:
@@ -35,7 +56,7 @@ const HistoryPage = () => {
           <h4>Orders record</h4>
        {history.length<=0 ? <p>Orders list is empty</p>:
          <OrdersList>
-          {history.map(item => {
+          {filterContacts().map(item => {
                   return (
                     <li key={item._id}  >
                       <p>Order from {item.name} on {item.createdAt.slice(0,10)}</p>

@@ -15,6 +15,7 @@ import themeReducer from './theme/themeSlice';
 import shopsReducer from './shops/shopsSlice';
 import cartReducer from './cart/cartSlice';
 import historyReducer from './history/historySlice'
+import { filterSlice } from './filter/filterSlice';
 
 const shopsPersistConfig = {
   key: 'shops',
@@ -46,7 +47,8 @@ export const store = configureStore({
     theme: persistedThemeReducer,
     shops: persistedShopsReducer,
     cart: persistedCartReducer,
-    history:persistedHistoryReducer
+    history:persistedHistoryReducer,
+    filter: filterSlice.reducer,
   },
 
   middleware: getDefaultMiddleware =>
