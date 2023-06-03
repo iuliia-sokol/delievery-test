@@ -127,8 +127,6 @@ const onCouponInputChange = (e)=>{
   setCoupon(e.target.value)
 }
 
-console.log(coupon);
-
     return (
       <Container >
           {!isLoaded ? (
