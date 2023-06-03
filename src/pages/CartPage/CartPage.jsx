@@ -31,10 +31,24 @@ const CartPage = (shopLang, shopLat) => {
   const [locationMarker, setLocationMarker]=useState({})
   const [coupon, setCoupon] = useState('')
   const [message, setMessage] = useState('')
-  
+  const [shop, setShop] = useState(null)
+  const [shopCoords, setShopCoords]=useState({lat:'', lng:''})
   const shops = useSelector(getShopsList)
-  const shop = shops.find(shop=> shop._id===cart[0].shopId)
-  const shopCoords = {"lat": +shop.lat, "lng": +shop.long}
+
+
+  useEffect(()=>{
+  if(shops.length>0 && cart.length>0) {
+    const selectedShop = shops.find(shop=> shop._id===cart[0].shopId)
+    setShop(selectedShop)
+   
+  }
+  },[cart, shops])
+
+  useEffect(()=>{
+    if(shop) {
+      setShopCoords({"lat": +shop.lat, "lng": +shop.long})
+    }
+  },[shop])
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey:`${MAPS_KEY}`,
@@ -129,7 +143,8 @@ console.log(coupon);
           center={locationMarker}
           zoom={10}
         >
-         <MarkerF
+       {shop &&  
+       <MarkerF
          clickable
          name={shop.name}
           onClick={() => {
@@ -147,7 +162,7 @@ console.log(coupon);
             </InfoWindowF>
           )}
 
-        </MarkerF>
+        </MarkerF>}
        {locationMarker &&
         <MarkerF
           clickable
