@@ -153,3 +153,45 @@ export const MapsInfo = styled.p`
 z-index:100;
 font-size:10px;
 `
+
+export const CouponWrapper = styled.div`
+display:flex;
+justify-content:space-between;
+
+input {
+  width:200px;
+    border-radius: 8px;
+    padding:6px 12px;
+}
+
+`
+export const CouponBtn = styled.button`
+    align-self:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  background-color:${p => p.theme.colors.mainAccent};
+  border-radius: ${p => p.theme.radii.btnStandart};
+  padding:8px 12px;
+  font-family: ${p => p.theme.fonts.main};
+  font-size: 14px;
+  font-weight: ${p => p.theme.fontWeights[2]};
+  text-transform: uppercase;
+  color: ${p => p.theme.colors.mainDark};
+  transition: ${p => p.theme.transitions.main};
+  opacity: ${p=>p.unactive === 'true'? 0.3 : 1 };
+  pointer-events: ${p=>p.unactive === 'true'? 'none' : 'unset' };
+  /* cursor: pointer; */
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    background-color: transparent;
+    border: 2px solid pink;
+  }
+
+`

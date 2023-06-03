@@ -16,6 +16,9 @@ export const HeaderComp = () => {
         } else if (pathname.includes('/history')) {
           setActive('history');
         }
+        else if (pathname.includes('/coupons')) {
+          setActive('coupons');
+        }
          else {
           setActive('home');
         }
@@ -40,6 +43,9 @@ export const HeaderComp = () => {
                 </StyledLink>
                 <StyledLink to="/history" selection={(active === 'history').toString()}>
                     History
+                </StyledLink>
+                <StyledLink to="/coupons" selection={(active === 'coupons').toString()}>
+                Coupons
                 </StyledLink>
                 </NavLinksWrapper>
                 <ThemeToggler />

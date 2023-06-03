@@ -26,7 +26,4 @@ export const BtnElement = styled.button`
     border: 2px solid pink;
 
   }
-  /* & > svg {
-    margin-right: 8px;
-  } */
 `;

@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 
 const CartPage = lazy(() => import('pages/CartPage/CartPage'));
 const HistoryPage = lazy(() => import('pages/HistoryPage/HistoryPage'));
+const CouponPage = lazy(() => import('pages/CouponsPage/CouponPage'));
 
 export const App = () => {
   const { mode } = useSelector(getMode);
@@ -26,6 +27,7 @@ export const App = () => {
       <Route index path="/home" element={<HomePage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/history" element={<HistoryPage />} />
+      <Route path="/coupons" element={<CouponPage/>}/>
       </Route>
       <Route path="*" element={<Error />} />
       </Routes>

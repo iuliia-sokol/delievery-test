@@ -7,7 +7,7 @@ import { useGeolocated } from 'react-geolocated';
 
 import { Container } from "components/Container/Container";
 import { MainWrapper } from "pages/HomePage/HomePage.styled";
-import { CaptchaWrapper, CartDataWrapper, CartImg, Form, FormWrapper, InputsWrapper, MapsInfo, ProductInfoWrapper, ProductPriceWrapper, ProductQuantityWrapper, ProductWrapper, TotalWrapper } from "./CartPage.styled";
+import { CaptchaWrapper, CartDataWrapper, CartImg, CouponBtn, CouponWrapper, Form, FormWrapper, InputsWrapper, MapsInfo, ProductInfoWrapper, ProductPriceWrapper, ProductQuantityWrapper, ProductWrapper, TotalWrapper } from "./CartPage.styled";
 import { getCart } from "redux/cart/cartSelectors";
 import defaultShopLogo from '../../images/defaultShopLogo.png'
 import { BASE_URL, CAPTCHA_KEY, MAPS_KEY } from 'utils/consts';
@@ -16,6 +16,7 @@ import { cleanCart, decrementQuantity, incrementQuantity, removeItem } from "red
 import { setHistory } from "redux/history/historyOperations";
 import { Loader } from "components/Loader/Loader";
 import { getShopsList } from "redux/shops/shopsSelectors";
+import { coupons } from "utils/coupons";
 
 
 const CartPage = (shopLang, shopLat) => {
@@ -28,7 +29,9 @@ const CartPage = (shopLang, shopLat) => {
   const [infoWindowOpen, setInfoWindowOpen] = useState(false);
   const [activeMarker, setActiveMarker] = useState(null)
   const [locationMarker, setLocationMarker]=useState({})
-
+  const [coupon, setCoupon] = useState('')
+  const [message, setMessage] = useState('')
+  
   const shops = useSelector(getShopsList)
   const shop = shops.find(shop=> shop._id===cart[0].shopId)
   const shopCoords = {"lat": +shop.lat, "lng": +shop.long}
@@ -61,10 +64,6 @@ const CartPage = (shopLang, shopLat) => {
     return;
   }, [coords, isGeolocationAvailable, isGeolocationEnabled]);
 
-  // useEffect(()=>{},[])
-  // console.log(shopCoords);
-
- 
   useEffect(()=>{
     if(cart.length>0){
       setTotal(cart.reduce((total, item)=>total+(item.price*item.quantity),0))
@@ -91,13 +90,30 @@ const CartPage = (shopLang, shopLat) => {
   }
 
   const onMarkerDragEnd = (coord) => {
-    console.log(coord);
     const { latLng } = coord;
     const lat = latLng.lat();
     const lng = latLng.lng();
     setLocationMarker({lat,lng})
-    
   };
+
+const onCouponSubmit =()=>{
+const submittedCoupon = coupons.find(el=>el.code === coupon)
+if(!submittedCoupon) {
+  setMessage("Coupon is unvalid")
+  setCoupon('')
+}
+else {
+  setMessage(`You used ${submittedCoupon.name} coupon`)
+  setCoupon('')
+}
+}
+
+
+const onCouponInputChange = (e)=>{
+  setCoupon(e.target.value)
+}
+
+console.log(coupon);
 
     return (
       <Container >
@@ -106,7 +122,7 @@ const CartPage = (shopLang, shopLat) => {
       ) :
       <MainWrapper>
         <FormWrapper>
-        <div>
+        <div style={{  "width":"100%","height": "250px"}}>
         {latitude && longitude && 
         <GoogleMap
           mapContainerClassName="map-container"
@@ -306,6 +322,16 @@ const CartPage = (shopLang, shopLat) => {
                   <p>Total:</p>
                   <p>{total} UAH</p>
                   </TotalWrapper>
+                  <CouponWrapper>
+                  <input type='text' value={coupon} placeholder="Add coupon code" onChange={(e)=>onCouponInputChange(e)}/> 
+                  <CouponBtn unactive={(!coupon).toString()}
+                  onClick={onCouponSubmit}
+                  >
+                    Use coupon</CouponBtn>
+                  </CouponWrapper>
+                  {message? <p>{message}</p>: <p></p>}
+
+                  
         </CartDataWrapper>
       </MainWrapper>
       }
