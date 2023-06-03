@@ -24,7 +24,7 @@ export const App = () => {
       <GlobalStyle />
       <Routes>
       <Route path="/" element={<SharedLayout />}>
-      <Route index path="/home" element={<HomePage />} />
+      <Route index path="/" element={<HomePage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/history" element={<HistoryPage />} />
       <Route path="/coupons" element={<CouponPage/>}/>

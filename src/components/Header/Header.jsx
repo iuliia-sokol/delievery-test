@@ -29,13 +29,13 @@ export const HeaderComp = () => {
           <Header>
               <HeaderWrapper>
                 <LogoWrapper>
-                  <NavLinkStyled to="/home">
+                  <NavLinkStyled to="/">
                     <img src={logo} alt="logo" />
                     <LogoText>GoodFood</LogoText>
                   </NavLinkStyled>
                 </LogoWrapper>
                 <NavLinksWrapper>
-                <StyledLink to="/home" selection={(active === 'home').toString()}>
+                <StyledLink to="/" selection={(active === 'home').toString()}>
                     Home
                 </StyledLink>
                 <StyledLink to="/cart" selection={(active === 'cart').toString()}>
