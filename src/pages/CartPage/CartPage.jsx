@@ -23,10 +23,10 @@ const CartPage = () => {
   },[cart])
 
   const handleSubmit = ({values, order, total}) => {
-    const data = {values, order, total}
+    const data = {name:values.name, email:values.email, phone:values.phone, address:values.address, order, total}
     console.log(data);
-    dispatch(cleanCart())
-    // dispatch(setHistory(data));
+    // dispatch(cleanCart())
+    dispatch(setHistory(data));
   };
 
 
@@ -42,8 +42,8 @@ const CartPage = () => {
         address: '',
       }}
       onSubmit={(values, actions) => {
-        console.log('form', values)
-        handleSubmit({values, order:JSON.stringify(cart), total});
+        // console.log('form', values)
+        handleSubmit({values, order:JSON.stringify(cart), total:total.toString()});
         actions.setSubmitting(false);
         actions.resetForm();
       }}

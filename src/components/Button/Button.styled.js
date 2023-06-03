@@ -16,7 +16,7 @@ export const BtnElement = styled.button`
   background-color: ${p => {
     return p.disabled ? p.theme.colors.btnDisabledBg : p.theme.colors.mainAccent;
   }};
-  color: ${p => p.theme.colors.mainLight};
+  color: ${p => p.theme.colors.mainDark};
   transition: ${p => p.theme.transitions.main};
   cursor: pointer;
 
@@ -24,6 +24,7 @@ export const BtnElement = styled.button`
   &:focus:not(:disabled) {
     background-color: transparent;
     border: 2px solid pink;
+
   }
   /* & > svg {
     margin-right: 8px;
