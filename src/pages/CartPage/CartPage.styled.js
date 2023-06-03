@@ -143,4 +143,8 @@ align-items:center;
 align-self:flex-end;
 justify-content:space-between;
 `
-
+export const CaptchaWrapper = styled.div`
+align-self:center;
+display:flex;
+justify-content:center;
+`

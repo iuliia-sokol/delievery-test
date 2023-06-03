@@ -1,20 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Formik } from 'formik';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Container } from "components/Container/Container";
 import { MainWrapper } from "pages/HomePage/HomePage.styled";
-import { CartDataWrapper, CartImg, Form, FormWrapper, InputsWrapper, ProductInfoWrapper, ProductPriceWrapper, ProductQuantityWrapper, ProductWrapper, TotalWrapper } from "./CartPage.styled";
+import { CaptchaWrapper, CartDataWrapper, CartImg, Form, FormWrapper, InputsWrapper, ProductInfoWrapper, ProductPriceWrapper, ProductQuantityWrapper, ProductWrapper, TotalWrapper } from "./CartPage.styled";
 import { getCart } from "redux/cart/cartSelectors";
 import defaultShopLogo from '../../images/defaultShopLogo.png'
-import { BASE_URL } from 'utils/consts';
+import { BASE_URL, CAPTCHA_KEY } from 'utils/consts';
 import { Button } from "components/Button/Button";
 import { cleanCart, decrementQuantity, incrementQuantity, removeItem } from "redux/cart/cartSlice";
 import { setHistory } from "redux/history/historyOperations";
+
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const cart = useSelector(getCart)
   const [total, setTotal] = useState(0)
+  const [checked, setChecked] = useState(false)
 
   useEffect(()=>{
     if(cart.length>0){
@@ -31,6 +34,10 @@ const CartPage = () => {
     dispatch(setHistory(data));
     setTotal(0)
   };
+
+  const onCaptchaClick = ()=> {
+    setChecked(!checked)
+  }
 
     return (
       <Container >
@@ -132,10 +139,16 @@ const CartPage = () => {
                 }}
               />
             </label>
+            <CaptchaWrapper>
+            <ReCAPTCHA
+              sitekey={CAPTCHA_KEY}
+              onChange={onCaptchaClick}
+            />
+          </CaptchaWrapper>
             <button
               type="submit"
               disabled={
-                !props.values.name || !props.values.email || !props.values.phone || !props.values.address
+                !checked || !props.values.name || !props.values.email || !props.values.phone || !props.values.address
               }
             >
              Submit
