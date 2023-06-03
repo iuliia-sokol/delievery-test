@@ -21,6 +21,7 @@ The data can be filtered by email field with the special filtering input.
 ![](demo1.gif)
 
 ![](demo2.gif)
+
 ## Features
 
 - Intuitive and creative design
@@ -32,6 +33,10 @@ The data can be filtered by email field with the special filtering input.
 
 **Server:** Node.JS, MongoDB, Express
 
+## Related links
+
+[LINK TO LIVE PAGE](https://iuliia-sokol.github.io/delivery-test/cart)
+[LINK TO BACKEND REPO](https://github.com/iuliia-sokol/delivery-test-back)
 
 ## Run Locally
 
@@ -58,7 +63,6 @@ Start the server
 ```bash
   npm start
 ```
-
 
 ## Environment Variables
 
