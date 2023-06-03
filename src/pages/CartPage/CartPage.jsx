@@ -28,8 +28,7 @@ const CartPage = () => {
     // dispatch(cleanCart())
     dispatch(setHistory(data));
   };
-
-
+  
     return (
       <Container >
       <MainWrapper>
@@ -42,7 +41,6 @@ const CartPage = () => {
         address: '',
       }}
       onSubmit={(values, actions) => {
-        // console.log('form', values)
         handleSubmit({values, order:JSON.stringify(cart), total:total.toString()});
         actions.setSubmitting(false);
         actions.resetForm();
@@ -166,18 +164,15 @@ const CartPage = () => {
                       <ProductPriceWrapper>
                       {item.price * item.quantity}
                       </ProductPriceWrapper>
-                     
+                
                       <Button text='Remove' location='cart' onClick={() => 
                        dispatch(removeItem(item.name))} />
                       </ProductWrapper>
-                      
-  
+                
                     </li>
                   );
                 })}
           </ul>}
-
-     
                 <TotalWrapper>
                   <p>Total:</p>
                   <p>{total} UAH</p>

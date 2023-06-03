@@ -1,4 +1,4 @@
-export const getHistory = state =>
+export const getHistoryRecord = state =>
   state.history.history;
-export const getIsShopFetching = state =>
+export const getIsHistoryFetching = state =>
   state.history.isFetching;

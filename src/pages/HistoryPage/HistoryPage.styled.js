@@ -63,3 +63,18 @@ border-radius: ${p => p.theme.radii.tabs};
 border: 2px solid rgba(110, 140, 500, 0.2);
   box-shadow: 10px 12px 12px 0px #cab1b14d, 0 0 10em 1em rgba(110, 140, 500, 0.2);
 `
+
+export const OrdersList = styled.ul`
+display:flex;
+flex-direction:column;
+gap:12px;
+`
+
+export const OrderWrapper = styled.div`
+display:flex;
+`
+
+export const OrderImg = styled.img`
+width:50px;
+border-radius: ${p => p.theme.radii.tabs};
+`
