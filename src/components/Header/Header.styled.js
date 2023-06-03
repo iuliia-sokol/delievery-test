@@ -80,7 +80,6 @@ export const StyledLink = styled(NavLink)`
   font-family: ${p => p.theme.fonts.main};
   font-size: 20px;
   font-weight: ${p => p.theme.fontWeights[1]};
-
   color: ${p =>
     p.selection === 'true'
       ? p.theme.colors.mainAccent
@@ -92,10 +91,10 @@ export const StyledLink = styled(NavLink)`
     color: ${p => p.theme.colors.mainAccent};
   }
 
-  &:hover svg,
+  /* &:hover svg,
   &:focus svg {
     stroke: ${p => p.theme.colors.mainAccent};
-  }
+  } */
 
   @media screen and (min-width: 1440px) {
     font-size: 24px;

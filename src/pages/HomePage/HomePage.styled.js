@@ -4,6 +4,8 @@ export const MainWrapper = styled.div`
 display:flex;
 justify-content:space-between;
 gap:30px;
+height:100%;
+align-items:stretch;
 `
 export const ShopsPanel = styled.aside`
 flex-basis: 30%;

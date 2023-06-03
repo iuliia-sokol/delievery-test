@@ -10,6 +10,7 @@ import { BASE_URL } from 'utils/consts';
 import { Button } from "components/Button/Button";
 import { Loader } from "components/Loader/Loader";
 import { addToCart } from "redux/cart/cartSlice";
+import { getCart } from "redux/cart/cartSelectors";
 
 const HomePage = () => {
 const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const [shops, setShops] = useState([])
 const [currentShop, setCurrentShop] = useState(null)
 const loading = useSelector(getIsShopFetching)
 const shopsArr = useSelector(getShopsList)
-
+const cart = useSelector(getCart)
 
 
 useEffect(() => {
@@ -35,6 +36,8 @@ useEffect(()=>{
 const onShopTabClick = (shopId) => {
   const selectedShop = shops.find(shop => shop._id === shopId)
   setCurrentShop(selectedShop)
+
+
 }
 
 return (
@@ -72,7 +75,7 @@ return (
                      <h4>{item.name}</h4>
                      <p>{item.description}</p>
                      </ProductData>
-                      <Button text='Add to cart'  onClick={() => 
+                      <Button text={cart.find(el => el.name === item.name)?"In cart":'Add to cart'} onClick={() => 
                        dispatch(addToCart(item))}/>
 
                       </ProductCard>

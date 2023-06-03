@@ -6,10 +6,11 @@ export const Button = ({
   disabled = false,
   type = 'button',
   onClick = null,
-  location='home'
+  location='home',
+
 }) => {
   return (
-    <BtnElement type={type} location={location} disabled={disabled} onClick={onClick}>
+    <BtnElement type={type}  location={location} disabled={disabled} onClick={onClick}>
       {Icon && <Icon></Icon>}
       {text}
     </BtnElement>

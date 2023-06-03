@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export const HeaderComp = () => {
     const { pathname } = useLocation();
-    const [active, setActive] = useState('');
+    const [active, setActive] = useState('home');
 
     useEffect(() => {
         if (pathname.includes('/cart')) {
@@ -16,11 +16,8 @@ export const HeaderComp = () => {
         } else if (pathname.includes('/history')) {
           setActive('history');
         }
-        else if (pathname.includes('/home')) {
-            setActive('home');
-          }
          else {
-          setActive('');
+          setActive('home');
         }
       }, [pathname]);
 

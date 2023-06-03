@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Container } from "components/Container/Container";
-import { HistoryWrapper, InputsWrapper,MainWrapper, OrderImg, OrderWrapper, OrdersList  } from "./HistoryPage.styled";
+import { HistoryWrapper, InputsWrapper,MainWrapper, OrderDataWrapper, OrderId, OrderImg, OrderWrapper, OrderedList, OrdersList, Total  } from "./HistoryPage.styled";
 import { getHistory } from "redux/history/historyOperations";
 import { getHistoryRecord, getIsHistoryFetching } from "redux/history/historySelectors";
 import { Loader } from "components/Loader/Loader";
@@ -32,16 +32,32 @@ const HistoryPage = () => {
         </InputsWrapper>
        {loading? <Loader/>:
         <HistoryWrapper>
-      {history.length<=0 ? <p>Orders list is empty</p>:
+          <h4>Orders record</h4>
+       {history.length<=0 ? <p>Orders list is empty</p>:
          <OrdersList>
           {history.map(item => {
                   return (
                     <li key={item._id}  >
+                      <p>Order from {item.name} on {item.createdAt.slice(0,10)}</p>
+                      <OrderId>Order ID: {item._id}</OrderId>
                       <OrderWrapper>
-                      <OrderImg
-                      src={item.pictureURL ? `${BASE_URL}/${item.pictureURL}`: defaultShopLogo} alt="shop logo"/>
-                      <h3>{item.name}</h3>
-
+                        <OrderedList>
+                       {item.order.map(prod=>{
+                       return (
+                        <li key={prod._id}>
+                          <OrderDataWrapper>
+                            <OrderImg
+                            src={prod.pictureURL ? `${BASE_URL}/${prod.pictureURL}`: defaultShopLogo} alt="shop logo"/>
+                            <p>{prod.name}</p>
+                          </OrderDataWrapper>
+                      
+                      <p>Amount: {prod.quantity}</p>
+                      <p>Price: {prod.price}</p>
+                        </li>)
+                       }
+                        )}
+                        </OrderedList>
+                      <Total>Total: {item.total} UAH</Total>
                       </OrderWrapper>
                     </li>
                   );

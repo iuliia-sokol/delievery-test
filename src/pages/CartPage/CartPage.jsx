@@ -20,15 +20,18 @@ const CartPage = () => {
     if(cart.length>0){
       setTotal(cart.reduce((total, item)=>total+(item.price*item.quantity),0))
       }
+      if(cart.length<=0){
+        setTotal(0)
+      }
   },[cart])
 
   const handleSubmit = ({values, order, total}) => {
     const data = {name:values.name, email:values.email, phone:values.phone, address:values.address, order, total}
-    console.log(data);
-    // dispatch(cleanCart())
+    dispatch(cleanCart())
     dispatch(setHistory(data));
+    setTotal(0)
   };
-  
+
     return (
       <Container >
       <MainWrapper>

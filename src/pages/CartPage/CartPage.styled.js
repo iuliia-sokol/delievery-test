@@ -55,7 +55,7 @@ button {
   font-size: 14px;
   font-weight: ${p => p.theme.fontWeights[2]};
   text-transform: uppercase;
-  color: ${p => p.theme.colors.mainLight};
+  color: ${p => p.theme.colors.mainDark};
   transition: ${p => p.theme.transitions.main};
   cursor: pointer;
 
@@ -104,6 +104,7 @@ border-radius: ${p => p.theme.radii.tabs};
 background-color: rgba(255, 255, 255, 0.1);
 box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
 `
+
 export const ProductInfoWrapper = styled.div`
 flex-basis:50%;
 display:flex;
