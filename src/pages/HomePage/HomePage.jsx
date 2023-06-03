@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Container } from "components/Container/Container";
-import { MainWrapper, ProductCard, ProductData, ProductImg, ProductsList, ProductsPanel, ShopLogoImg, ShopTab, ShopsList, ShopsPanel } from "./HomePage.styled";
+import { MainWrapper, ProductCard, ProductData, ProductImg, ProductsList, ProductsPanel, Shop, ShopLogoImg, ShopTab, ShopsList, ShopsPanel } from "./HomePage.styled";
 import defaultShopLogo from '../../images/defaultShopLogo.png'
 import { getShops } from "redux/shops/shopsOperations";
 import { getIsShopFetching, getShopsList } from "redux/shops/shopsSelectors";
@@ -16,6 +16,7 @@ const HomePage = () => {
 const dispatch = useDispatch();
 const [shops, setShops] = useState([])
 const [currentShop, setCurrentShop] = useState(null)
+const [disabled, setDisabled] = useState([])
 const loading = useSelector(getIsShopFetching)
 const shopsArr = useSelector(getShopsList)
 const cart = useSelector(getCart)
@@ -32,6 +33,14 @@ useEffect(()=>{
      setCurrentShop(shopsArr[0])
     }
 },[shopsArr])
+
+useEffect(()=>{
+  if(cart.length>0){
+    const shopId = cart[0].shopId
+    const disabledShops = shops.filter(shop => shop._id !== shopId)
+    setDisabled(disabledShops)
+    }
+},[cart, shops])
 
 const onShopTabClick = (shopId) => {
   const selectedShop = shops.find(shop => shop._id === shopId)
@@ -50,14 +59,14 @@ return (
           <ShopsList>
           {shops.map(item => {
                   return (
-                    <li key={item._id}  onClick={()=>onShopTabClick(item._id)} style={currentShop && currentShop._id === item._id? {'background': 'hsla(215, 98%, 79%, 0.4)'} : {'background': 'transparent'} }>
+                    <Shop key={item._id} unactive={disabled && (disabled.find(el=>el._id === item._id))? 'true': 'false'} onClick={()=>onShopTabClick(item._id)} style={currentShop && currentShop._id === item._id? {'background': 'hsla(215, 98%, 79%, 0.4)'} : {'background': 'transparent'} }>
                       <ShopTab>
                       <ShopLogoImg
                       src={item.avatarURL ? `${BASE_URL}/${item.avatarURL}`: defaultShopLogo} alt="shop logo"/>
                       <h3>{item.name}</h3>
 
                       </ShopTab>
-                    </li>
+                    </Shop>
                   );
                 })}
           </ShopsList>

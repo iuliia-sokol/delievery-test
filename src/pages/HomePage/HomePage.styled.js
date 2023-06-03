@@ -27,15 +27,14 @@ export const ShopsList =styled.ul`
 display:flex;
 flex-direction:column;
 gap:16px;
-
-
-li {
-    border-radius: ${p => p.theme.radii.tabs};
+`
+export const Shop = styled.li`
+   border-radius: ${p => p.theme.radii.tabs};
     padding: 16px;
     background-color: hsla(215, 98%, 79%, 0.4);
     box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
-
-}
+    opacity: ${p=>p.unactive === 'true'? 0.3 : 1 };
+    pointer-events: ${p=>p.unactive === 'true'? 'none' : 'unset' };
 `
 
 export const ShopTab = styled.div`
@@ -76,8 +75,6 @@ gap:12px;
 li{
     width:calc(100% / 3 - 12px); 
     height:fit-content;
-    /* max-height:360px; */
-
 }
 `
 
